@@ -1,0 +1,14 @@
+{% extends 'books/base.html' %}
+{% load static %}
+{% block content%}
+<a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-plus">All Books</span></a>
+<h1>{{book.name}}</h1>
+<p>
+    Price: {{book.price}}<br>
+    Appropriate: {{book.appropriate}}<br>
+    Author: <a href="authors/{{book.author.id}}" >{{book.author.name}}</a><br>
+    Added to site at : {{book.created_date}}<br>
+    publish date: {{book.publish_date}}<br>
+</p>
+{# <img src="{% static 'books/images/' %}{{book.image}}" alt="image"> #}
+{% endblock %}

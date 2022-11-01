@@ -1,0 +1,11 @@
+{% extends 'crowdfunding_app/base.html' %}
+{% load static %}
+{% block content%}
+<a href="{% url 'book_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">Add new book</span></a>
+<ul>
+    {% for book in books_list %}
+        <li><a href="{% url 'show' book_id=book.id %}">{{book.name}}</a> - <span><a href="{% url 'book_edit' book_id=book.id %}">edit</a>
+        </span> - <span><a href="{% url 'book_delete' book_id=book.id %}">delete</a></span></li>
+    {% endfor %}
+</ul>
+{% endblock %}
