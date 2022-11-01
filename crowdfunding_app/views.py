@@ -10,7 +10,10 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['latest_projects'] = Project.objects.orderby('-create_date')[0:4]
+        context['highest_projects'] = Project.objects.order_by('-rate')[:5]
+        context['latest_projects'] = Project.objects.orderby('-create_date')[:5]
+        context['featured_projects'] = Project.objects.filter(featured=1)[:5]
+        context['categories'] = Category.objects.all()
         return context
 
 
