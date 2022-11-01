@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
+from .models import Project, Category, Image
 
 
 class HomePageView(TemplateView):
@@ -9,7 +10,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        # context['latest_articles'] = Article.objects.all()[:5]
+        context['latest_projects'] = Project.objects.orderby('-create_date')[0:4]
         return context
 
 

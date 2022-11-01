@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from crowdfunding_app.views import HomePageView
+from django.contrib.auth import views as auth
+from user import views as user_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name='home'),
-    path('crowdfunding', include('crowdfunding_app.urls')),
+    path('crowdfunding/', include('crowdfunding_app.urls')),
+    path('users/', include('user.urls')),
+    path('login/', user_view.login, name='login'),
+    path('logout/', auth.LogoutView.as_view(template_name='user/index.html'), name='logout'),
+    path('register/', user_view.register, name='register'),
 ]
