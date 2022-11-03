@@ -13,6 +13,7 @@ class Project(models.Model):
     details = models.TextField(null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,
                                  related_name='projects')
+    # paid_amount = models.FloatField(null=True)
     total_target = models.FloatField()
     rate = models.FloatField(null=True)
     create_date = models.DateTimeField(auto_now_add=True)

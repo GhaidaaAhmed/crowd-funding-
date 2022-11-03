@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
     last_name = forms.CharField(max_length=20)
     profile_pic = forms.ImageField(required=False)
     facebook_url = forms.URLField(required=False)
-    Birthdate = forms.DateField(required=False)
+    birthdate = forms.DateField(required=False)
     country = forms.CharField(max_length=20, required=False)
 
     class Meta:
