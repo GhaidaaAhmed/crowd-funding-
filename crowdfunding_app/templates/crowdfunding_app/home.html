@@ -1,5 +1,65 @@
 {% extends 'crowdfunding_app/base.html' %}
 {% load static %}
+{% block style %}
+<style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica", sans-serif;
+      }
+      img {
+        max-width: 100%;
+      }
+      .slider-container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .menu {
+        position: absolute;
+        left: 0;
+        z-index: 900;
+        width: 100%;
+        bottom: 0;
+      }
+      .menu label {
+        cursor: pointer;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        border-radius: 50px;
+        margin: 0 0.2em 1em;
+      }
+      .menu label:hover,
+      .menu label:focus {
+        background: #1c87c9;
+      }
+      .slide {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        z-index: 10;
+        padding: 8em 1em 0;
+        background-size: cover;
+        background-position: 50% 50%;
+        transition: left 0s 0.75s;
+      }
+      [id^="slide"]:checked + .slide {
+        left: 0;
+        z-index: 100;
+        transition: left 0.65s ease-out;
+      }
+
+</style>
+{% endblock%}
 {% block content%}
 
 <div class="row">
@@ -15,10 +75,21 @@
         <p>{{project.details}}</p>
         <p>
             <a class="btn btn-primary"
-              href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
-            Stuff</a>
+               href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
+                Stuff</a>
         </p>
     </div>
+    {% endfor %}
+</div>
+<div class="slider-container">
+    <div class="menu">
+        <label for="slide-dot-1"></label>
+        <label for="slide-dot-2"></label>
+        <label for="slide-dot-3"></label>
+    </div>
+    {% for project in highest_projects %}
+    <input id="slide-dot-{{project.id}}" type="radio" name="slides" checked>
+    <div class="slide slide-1" style="background-image:{% get_media_prefix %}{{ project.image }}"></div>
     {% endfor %}
 </div>
 
@@ -35,8 +106,8 @@
         <p>{{project.details}}</p>
         <p>
             <a class="btn btn-primary"
-              href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
-            Stuff</a>
+               href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
+                Stuff</a>
         </p>
     </div>
     {% endfor %}
@@ -55,8 +126,8 @@
         <p>{{project.details}}</p>
         <p>
             <a class="btn btn-primary"
-              href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
-            Stuff</a>
+               href="https://www.quackit.com/html/templates/download/bootstrap/portfolio-2-column/index.html#">More
+                Stuff</a>
         </p>
     </div>
     {% endfor %}
@@ -64,8 +135,8 @@
 
 <h2>Categories</h2>
 <ul>
-    {% for project in categories %}
-    <li>{{category.title}}</li>
+    {% for category in categories %}
+    <li><a href="{% url 'category_projects' category_id=category.id %}">{{category.name}}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

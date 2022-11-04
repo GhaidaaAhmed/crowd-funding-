@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from .models import Project, Category, Image
 
 
@@ -20,4 +21,9 @@ class HomePageView(TemplateView):
 def index(request):
     return HttpResponse("Crowdfunding app homepage")
 
-# Create your views here.
+
+def category_projects(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    return render(request, 'crowdfunding_app/projects/index.html', context={
+        "category": category
+    })
